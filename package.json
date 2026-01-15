@@ -2,13 +2,21 @@
   "name": "playwright-ts",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "allure": "allure serve allure-results",
+    "test:report": "npx playwright test & allure serve allure-results"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@faker-js/faker": "^10.2.0",
     "@playwright/test": "^1.57.0",
-    "@types/node": "^25.0.8"
-  }
+    "@types/node": "^25.0.8",
+    "allure-playwright": "^3.4.5",
+    "dotenv": "^17.2.3"
+  },
+  "type": "module"
 }
