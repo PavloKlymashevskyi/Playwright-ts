@@ -14,8 +14,11 @@ export class SignUpPage {
     private readonly phoneInput: Locator;
     private readonly emailInput: Locator;
     private readonly passwordInput: Locator;
-    private readonly submitButton: Locator;
+    readonly registerButton: Locator;
 
+    private readonly form: Locator;
+    readonly inputInvalidBorder: Locator;
+    private readonly dangerAlertBlock: Locator;
 
 
     constructor(page: Page) {
@@ -31,7 +34,11 @@ export class SignUpPage {
         this.phoneInput = page.locator('[data-test="phone"]');
         this.emailInput = page.locator('[data-test="email"]');
         this.passwordInput = page.locator('[data-test="password"]');
-        this.submitButton = page.locator('[data-test="register-submit"]');
+        this.registerButton = page.locator('[data-test="register-submit"]');
+
+        this.form = page.locator('form[data-test="register-form"]');
+        this.inputInvalidBorder = page.locator("form[data-test='register-form'] .is-invalid") //- red line input
+        this.dangerAlertBlock = page.locator("form div .alert-danger") //- with text
     }
 
     async goto() {
@@ -52,13 +59,20 @@ export class SignUpPage {
         await this.phoneInput.fill(userData.phoneNumber);
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
-        await this.submitButton.click();
+        await this.registerButton.click();
 
         return {
             ...userData,
             email,
             password
         };
+    }
+
+    async arrayDataTextErrors() {
+        const textAlert = await this.dangerAlertBlock.allTextContents();
+        let errorMessagesArray = textAlert.map(msg => msg.trim()).filter(msg => msg.length > 0);
+        return errorMessagesArray;
+
     }
 
 }

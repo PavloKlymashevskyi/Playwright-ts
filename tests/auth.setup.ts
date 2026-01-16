@@ -3,7 +3,7 @@ import { SignUpPage } from '../pages/signup/sign.page';
 import { LoginPage } from '../pages/login/login.page';
 import { saveUserObject } from '../helpers/saveUserObject'
 
-setup("Create user auth", async ({ page, context }) => {
+setup("Create user1 auth", async ({ page, context }) => {
     let user = null;
     const email = `testemail_${Date.now()}@example.com`;
 
