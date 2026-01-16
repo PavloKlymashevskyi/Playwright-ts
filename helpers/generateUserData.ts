@@ -1,7 +1,9 @@
 import { faker } from '@faker-js/faker';
+import { randomCountry } from './randomCountry';
 
 let phoneNumber = faker.phone.number({ style: 'international' }).substring(1);
 let dobFormatted = faker.date.birthdate({ mode: 'age', min: 18, max: 65 }).toISOString().split('T')[0];
+
 
 export function generateUserData() {
   return {
@@ -12,7 +14,7 @@ export function generateUserData() {
     zipCode: faker.location.zipCode(),
     city: faker.location.city(),
     state: faker.location.state(),
-    country: faker.location.country(),
+    country: randomCountry(),
     phoneNumber: phoneNumber,
   };
 };
