@@ -1,22 +1,18 @@
 import { test as baseTest, Page } from '@playwright/test';
 import { SignUpPage } from "../pages/auth/register/register.page"
 import { LoginPage } from '../pages/auth/login/login.page';
+import { ProfilePage } from '../pages/account/profile/profile.page';
 
-type MyPages = {
+type Fixtures = {
   signUpPage: SignUpPage
   loginPage: LoginPage,
+  profilePage: ProfilePage,
   authPage: Page,
   unAuthPage: Page
 }
 
 
-export const test = baseTest.extend<MyPages>({
-  signUpPage: async ({ page }, use) => {
-    await use(new SignUpPage(page));
-  },
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
-  },
+export const test = baseTest.extend<Fixtures>({
   authPage: async ({ browser }, use) => {
     const context = await browser.newContext({
       storageState: '.auth/user1.json',
@@ -33,6 +29,15 @@ export const test = baseTest.extend<MyPages>({
     await use(page);
     await context.close();
   },
+    signUpPage: async ({ page }, use) => {
+    await use(new SignUpPage(page));
+  },
+  loginPage: async ({ page }, use) => {
+    await use(new LoginPage(page));
+  },
+  profilePage: async ({ authPage }, use) => {
+    await use(new ProfilePage(authPage));
+  }
 });
 
 

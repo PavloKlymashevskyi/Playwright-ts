@@ -6,11 +6,18 @@ export class LoginPage {
     private readonly passwordInput: Locator;
     private readonly loginButton: Locator;
 
+    readonly dangerEmailError: Locator;
+    readonly dangerPasswordError: Locator;
+    readonly dangerEmailOrPassword: Locator;
+
     constructor(page: Page) {
         this.page = page;
         this.emailInput = page.locator('#email');
         this.passwordInput = page.locator("#password");
-        this.loginButton = page.locator('input[aria-label="Login"]');       
+        this.loginButton = page.locator('input[aria-label="Login"]');
+        this.dangerEmailError = page.locator("#email-error");
+        this.dangerPasswordError = page.locator("#password-error");
+        this.dangerEmailOrPassword = page.locator(".help-block")
     }
 
     async goto() {
