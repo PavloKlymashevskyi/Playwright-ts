@@ -1,5 +1,5 @@
 import { type Locator, type Page } from "@playwright/test";
-import { generateUserData } from '../../helpers/generateUserData';
+import { generateUserData } from '../../../helpers/generateUserData';
 
 export class SignUpPage {
     private readonly page: Page;

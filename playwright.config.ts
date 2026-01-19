@@ -34,16 +34,25 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    { 
-      name: 'setup', 
-      testMatch: /.*\.setup\.ts/ },
     {
-      name: 'chromium',
-      use: { 
+      name: 'setup',
+      testMatch: /auth\.setup\.ts/
+    },
+    {
+      name: 'chromium-auth',
+      testDir: "./tests/e2e/auth-tests",
+      use: {
         ...devices['Desktop Chrome'],
-        //storageState: 'playwright/.auth/user1.json', 
+        storageState: 'playwright/.auth/user1.json', 
       },
       dependencies: ['setup'],
+    },
+    {
+      name: 'chromium-unauth',
+      testDir: './tests/e2e/unauth-tests',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     },
     // {
     //   name: 'firefox',

@@ -1,9 +1,8 @@
-import { test, expect } from '../../fixtures/pages.fixtures';
+import { test, expect } from '../../../fixtures/pages.fixtures';
 
 test.describe('Trying to user registration with incorrect data', () => {
-    test.use({ storageState: undefined });
 
-    test.beforeEach(async ({ signUpPage }) => {
+    test.beforeEach(async ({  signUpPage }) => {
         await signUpPage.goto();
     });
 
