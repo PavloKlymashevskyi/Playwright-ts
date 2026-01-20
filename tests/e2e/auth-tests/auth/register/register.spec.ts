@@ -1,5 +1,5 @@
-import { test, expect } from '../../../fixtures/pages.fixtures';
-import { loadUserObject } from '../../../helpers/saveUserObject';
+import { test, expect } from '../../../../../fixtures/pages.fixtures';
+import { loadUserObject } from '../../../../../helpers/saveUserObject';
 
 test.describe('login user1 with auth setup', () => {
 

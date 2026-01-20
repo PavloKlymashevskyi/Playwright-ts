@@ -55,3 +55,19 @@ test.describe('profile user page "Profile" block', () => {
 
 });
 
+// test.describe('profile user page Password block', () => {
+
+//     test.beforeEach(async ({ profilePage }) => {
+//         await profilePage.goto();
+//     });
+
+//     test("Successfully Change the password", async ({ profilePage }) => {
+//         //text: Your password is successfully updated!
+//     });
+
+
+//     // text: New Password cannot be same as your current password.
+//     // text: Your current password does not matches with the password.
+
+
+// });
