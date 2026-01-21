@@ -16,7 +16,7 @@ test.describe('search', () => {
         const actualText = await searchComponent.searchText.innerText();
         expect(actualText).toContain(expectedText);
 
-        const filteredTitles = await searchComponent.getCardTitles(page);
+        const filteredTitles = await searchComponent.getFilterCardTitles(page);
         for (const title of filteredTitles) {
             expect(title.toLowerCase()).toContain(expectedText.toLowerCase());
         }
@@ -34,6 +34,29 @@ test.describe('search', () => {
         expect(actualText).toContain(expectedText);
 
         expect(searchComponent.noResult).toHaveText("There are no products found.");
+    });
+
+    test('search and reset functionality', async ({ page }) => {
+        const searchComponent = new Search(page);
+
+        await expect(searchComponent.productGrid.getByRole('link')).toHaveCount(9);
+        const initialTitles = await searchComponent.getProductList();
+
+        await searchComponent.searchInput.fill("Pliers");
+        await searchComponent.searchButton.click();
+
+        await page.waitForSelector(searchComponent.productSearchCompleted);
+
+        const filteredTitles = await searchComponent.getFilterCardTitles(page);
+        for (const title of filteredTitles) {
+            expect(title.toLowerCase()).toContain("pliers");
+        }
+
+        await searchComponent.searchReset.click();
+        
+        await expect(searchComponent.productGrid.getByRole('link')).toHaveCount(9);
+        const resetTitles = await searchComponent.getProductList();
+        expect(resetTitles).toEqual(initialTitles);
     });
 
 });
