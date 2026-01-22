@@ -1,4 +1,4 @@
-import { type Locator} from "@playwright/test";
+import { type Locator, Page} from "@playwright/test";
 
 export class Search {
     readonly searchInput: Locator;
@@ -13,7 +13,7 @@ export class Search {
     readonly noResult: Locator;
     readonly productGrid: Locator;
 
-    constructor(page) {
+    constructor(page: Page) {
         this.searchInput = page.locator('[data-test="search-query"]');
         this.searchReset = page.locator('[data-test="search-reset"]');
         this.searchButton = page.locator('[data-test="search-submit"]');

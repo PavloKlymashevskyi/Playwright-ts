@@ -1,5 +1,5 @@
 import { test, expect } from '../../../fixtures/pages.fixtures';
-import { Search } from '../../../components/filters/search'
+import { Search } from '../../../components/filters/Search'
 
 test.describe('search', () => {
     test.beforeEach(async ({ page }) => {

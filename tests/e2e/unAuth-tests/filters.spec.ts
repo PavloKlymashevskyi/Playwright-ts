@@ -1,5 +1,5 @@
 import { test, expect } from '../../../fixtures/pages.fixtures';
-import { Filters } from '../../../components/filters/filters'
+import { Filters } from '../../../components/filters/Filters'
 
 test.describe('filters Hand Tools', () => {
     test.beforeEach(async ({ page }) => {

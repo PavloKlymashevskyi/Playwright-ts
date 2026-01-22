@@ -1,4 +1,4 @@
-import { type Locator } from "@playwright/test";
+import { type Locator, Page } from "@playwright/test";
 
 export class Filters {
     // By category:
@@ -35,7 +35,7 @@ export class Filters {
     readonly sustainabilityShowOnlyEcoFriendlyProducts: Locator;
 
 
-    constructor(page) {
+    constructor(page: Page) {
         this.categoryHandToolsCheckbox = page.getByRole('checkbox', { name: 'Hand Tools' });
         this.categoryHammerCheckbox = page.getByRole('checkbox', { name: 'Hammer' });
         this.categoryHandSawCheckbox = page.getByText('Hand Saw', { exact: true });

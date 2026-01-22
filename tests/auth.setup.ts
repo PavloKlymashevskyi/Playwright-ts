@@ -1,6 +1,6 @@
 import { test as setup, expect } from '@playwright/test';
-import { SignUpPage } from '../pages/auth/register/register.page';
-import { LoginPage } from '../pages/auth/login/login.page';
+import { SignUpPage } from '../pages/auth/register/Register.page';
+import { LoginPage } from '../pages/auth/login/Login.page';
 import { saveUserObject } from '../helpers/saveUserObject'
 
 setup("Create user1 auth", async ({ page, context }) => {
