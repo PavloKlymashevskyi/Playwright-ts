@@ -49,7 +49,7 @@ test.describe('search', () => {
 
         const filteredTitles = await searchComponent.getFilterCardTitles(page);
         for (const title of filteredTitles) {
-            expect(title.toLowerCase()).toContain("pliers");
+            await expect(title.toLowerCase()).toContain("pliers");
         }
 
         await searchComponent.searchReset.click();
