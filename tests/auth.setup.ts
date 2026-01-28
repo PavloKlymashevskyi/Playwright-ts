@@ -1,27 +1,20 @@
 import { test as setup, expect } from '@playwright/test';
-import { SignUpPage } from '../pages/auth/register/Register.page';
 import { LoginPage } from '../pages/auth/login/Login.page';
-import { saveUserObject } from '../helpers/saveUserObject'
+import { loadUserObject } from '../helpers/saveUserObject'
 
-setup("Create user1 auth", async ({ page, context }) => {
-    let user = null;
-    const email = `testemail_${Date.now()}@example.com`;
-
-    const signUpPage = new SignUpPage(page);
+setup("Login to user1 auth",{}, async ({ page, context }) => {
+    const user = loadUserObject();
     const loginPage = new LoginPage(page);
     const userAuthFile = '.auth/user1.json';
 
-    await signUpPage.goto();
-    user = await signUpPage.createRandomUser(email, process.env.PASSWORD);
-    await expect(page.locator("h3")).toContainText("Login");
-
     await loginPage.goto();
-    await loginPage.loginUser(email, process.env.PASSWORD);
+    await loginPage.loginUser(user.email, user.password);
 
-    await expect(page.locator("h1")).toContainText("My account");
+    await expect(page.getByRole("heading", {name: "My account"})).toContainText("My account");
     await expect(page.locator('#menu')).toHaveText(`${user.firstName} ${user.lastName}`);
 
-    await saveUserObject(user);
     await context.storageState({ path: userAuthFile });
-   
+
+    await page.close();
+    await context.close();
 });

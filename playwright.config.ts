@@ -36,25 +36,36 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'create-user',
+      testDir: './tests',
+      testMatch: 'createUser.test.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
       name: 'setup',
-      testMatch: /auth\.setup\.ts/
+      testMatch: /auth\.setup\.ts/,
+      dependencies: ['create-user'],
     },
     {
       name: 'chromium-auth',
       testDir: "./tests/e2e/auth-tests",
+      testIgnore: 'createUser.test.ts',
       use: {
         ...devices['Desktop Chrome'],
-        storageState: 'playwright/.auth/user1.json', 
+        storageState: 'playwright/.auth/user1.json',
       },
       dependencies: ['setup'],
     },
     {
       name: 'chromium-unauth',
       testDir: './tests/e2e/unauth-tests',
+      testIgnore: 'createUser.test.ts',
       use: {
         ...devices['Desktop Chrome'],
       },
-    },
+    }
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
