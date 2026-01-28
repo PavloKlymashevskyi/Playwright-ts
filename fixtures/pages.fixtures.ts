@@ -1,14 +1,17 @@
 import { test as baseTest, Page } from '@playwright/test';
-import { SignUpPage } from "../pages/auth/register/register.page"
-import { LoginPage } from '../pages/auth/login/login.page';
-import { ProfilePage } from '../pages/account/profile/profile.page';
+import { SignUpPage } from "../pages/auth/register/Register.page"
+import { LoginPage } from '../pages/auth/login/Login.page';
+import { ProfilePage } from '../pages/account/profile/Profile.page';
+import { IndexPage } from '../pages/Index.page';
 
 type Fixtures = {
   signUpPage: SignUpPage
   loginPage: LoginPage,
   profilePage: ProfilePage,
+  indexPage: IndexPage,
+
   authPage: Page,
-  unAuthPage: Page
+  unAuthPage: Page,
 }
 
 
@@ -22,21 +25,22 @@ export const test = baseTest.extend<Fixtures>({
     await context.close();
   },
   unAuthPage: async ({ browser }, use) => {
-    const context = await browser.newContext({
-      storageState: undefined,
-    });
+    const context = await browser.newContext();
     const page = await context.newPage();
     await use(page);
     await context.close();
   },
-    signUpPage: async ({ page }, use) => {
-    await use(new SignUpPage(page));
+  signUpPage: async ({ unAuthPage }, use) => {
+    await use(new SignUpPage(unAuthPage));
   },
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
+  loginPage: async ({ unAuthPage }, use) => {
+    await use(new LoginPage(unAuthPage));
   },
   profilePage: async ({ authPage }, use) => {
     await use(new ProfilePage(authPage));
+  },
+  indexPage: async ({ page }, use) => {
+    await use(new IndexPage(page));
   }
 });
 
