@@ -1,6 +1,7 @@
 import { type Locator, type Page } from "@playwright/test";
 import { test, expect } from '../../../fixtures/pages.fixtures';
 import { loadUserObject } from '../../../helpers/saveUserObject';
+import { NavBar } from "../../../components/navbar/NavBar";
 
 export class ProfilePage {
     private readonly page: Page;
@@ -30,6 +31,8 @@ export class ProfilePage {
 
     readonly successfullyBlock: Locator;
     readonly dangeAlert: Locator;
+
+    readonly navBar: NavBar;
 
 
     constructor(page: Page) {
@@ -66,6 +69,8 @@ export class ProfilePage {
 
         this.successfullyBlock = page.getByRole('alert');
         this.dangeAlert = page.locator(".alert-danger");
+
+        this.navBar = new NavBar(page);
     }
 
     async goto() {
