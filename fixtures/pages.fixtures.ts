@@ -2,6 +2,7 @@ import { test as baseTest, Page } from '@playwright/test';
 import { SignUpPage } from "../pages/auth/register/Register.page"
 import { LoginPage } from '../pages/auth/login/Login.page';
 import { ProfilePage } from '../pages/account/profile/Profile.page';
+import { HomePage } from '../pages/account/Home.page';
 import { IndexPage } from '../pages/Index.page';
 
 type Fixtures = {
@@ -9,6 +10,7 @@ type Fixtures = {
   loginPage: LoginPage,
   profilePage: ProfilePage,
   indexPage: IndexPage,
+  homePage: HomePage,
 
   authPage: Page,
   unAuthPage: Page,
@@ -41,7 +43,10 @@ export const test = baseTest.extend<Fixtures>({
   },
   indexPage: async ({ page }, use) => {
     await use(new IndexPage(page));
-  }
+  },
+  homePage: async ({ authPage }, use) => {
+    await use(new HomePage(authPage));
+  },
 });
 
 
